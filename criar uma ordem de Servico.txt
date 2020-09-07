@@ -1,0 +1,11 @@
+//criar uma ordem de servico na tabela ordem_servico no Postman
+//Enderecço URL: localhost:8080/ordens-servico
+//Script abaixo:
+{
+	"cliente": {
+		"id":2
+	},
+	"descricao": "Reparo de noteboot dell. Cliente diz que não liga",
+	"preco": 300.50,
+    "dataFinalizacao":
+}

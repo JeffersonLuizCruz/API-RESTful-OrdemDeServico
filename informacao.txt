@@ -1,0 +1,17 @@
+# O objetivo deste arquivo é fazer algumas anotações básicas do projeto. 18/08/2020
+
+OBS: Flyway é um aplicação de migração do banco de dados. - Necessário entender melhor ele.
+O Flyway faz parte do Spring. Para usá-lo śo baixar pelo Edit Starts.
+
+Para instalação do Flyway no Spring será necessário criar uma pasta chamada 'db/migration' dentro
+'/src/main/resources'
+    e dentro da pasta criada 'db/migration' terá que ser criado um arquivo seguindo umas regras. a letra 'v' sempre precederá junto com uma sequência númerica. Depois dois anderline '__' seguido de um nome qualquer de indentificação com estenção '.sql'
+Exemplo abaixo:
+
+v001__crie-tabela-cliente.sql
+-----------------------------
+
+O que é a linguagem JPQL?
+--------------------------
+Método JPA inserido dentro da interface para buscar por palavras imcompletas:
+List<Cliente> findByNomeContaining(String nome);
