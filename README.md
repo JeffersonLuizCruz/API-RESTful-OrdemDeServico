@@ -5,7 +5,7 @@ Esta aplicação usa o conceito de boas práticas de criação de API Rest. Esta
 <h3> SQL</h1>
 
 CREATE TABLE `cliente` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,</br>
   `nome` varchar(60) NOT NULL,
   `email` varchar(255) NOT NULL,
   `telefone` varchar(20) NOT NULL,
