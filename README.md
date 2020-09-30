@@ -4,12 +4,12 @@ Esta aplicação usa o conceito de boas práticas de criação de API Rest. Esta
 
 <h3> SQL</h1>
 
-CREATE TABLE `cliente` (
+CREATE TABLE `cliente` (</br>
   `id` bigint NOT NULL AUTO_INCREMENT,</br>
-  `nome` varchar(60) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `telefone` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
+  `nome` varchar(60) NOT NULL,</br>
+  `email` varchar(255) NOT NULL,</br>
+  `telefone` varchar(20) NOT NULL,</br>
+  PRIMARY KEY (`id`)</br>
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
 CREATE TABLE `ordem_servico` (
