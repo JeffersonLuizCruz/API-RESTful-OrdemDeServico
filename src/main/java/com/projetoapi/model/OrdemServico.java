@@ -1,5 +1,7 @@
 package com.projetoapi.model;
 
+import java.io.Serializable;
+
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
@@ -18,11 +20,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
+
 @Getter
 @Setter
-@EqualsAndHashCode // O certo serial criar o Equal And HasCode só para 'private Long id;'
-public class OrdemServico {
+@EqualsAndHashCode
+@Entity
+public class OrdemServico implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
