@@ -30,7 +30,7 @@ public class ClienteController {
 	@Autowired
 	IClienteRepository clienteRepository;
 	
-	@GetMapping("/lista")
+	@GetMapping
 	public List<Cliente> listar(){
 		List<Cliente> listarClientes = clienteRepository.findAll();
 		return listarClientes;

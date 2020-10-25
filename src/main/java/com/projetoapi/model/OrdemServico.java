@@ -12,9 +12,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.groups.ConvertGroup;
+import javax.validation.groups.Default;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.projetoapi.domain.validationGroups.ValidationGroups;
 
 
 @Entity
@@ -27,21 +33,26 @@ public class OrdemServico implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-
+	@Valid
+	@ConvertGroup(from = Default.class, to = ValidationGroups.class)
+	@NotNull
 	@ManyToOne
 	private Cliente cliente;
 	
+	@NotBlank
 	private String descricao;
+	
+	@NotNull
 	private BigDecimal preco;
 	
 	@Enumerated(EnumType.STRING) 
-	@JsonProperty(access = Access.READ_ONLY)
+	@JsonProperty(access = Access.READ_ONLY) // Torna o status inalterável para o cliente na hora de criar uma OS
 	private StatusOrdemServico status;
 	
-	@JsonProperty(access = Access.READ_ONLY)
+	@JsonProperty(access = Access.READ_ONLY) // Torna o dataAbertura inalterável para o cliente na hora de criar uma OS
 	private OffsetDateTime dataAbertura;
 	
-	@JsonProperty(access = Access.READ_ONLY)
+	@JsonProperty(access = Access.READ_ONLY) // Torna o dataFinalizacao inalterável para o cliente na hora de criar uma OS
 	private OffsetDateTime dataFinalizacao;
 	
 	public OrdemServico() {
