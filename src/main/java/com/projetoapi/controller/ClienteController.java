@@ -30,7 +30,7 @@ public class ClienteController {
 	@Autowired
 	IClienteRepository clienteRepository;
 	
-	@GetMapping("/listar")
+	@GetMapping("/lista")
 	public List<Cliente> listar(){
 		List<Cliente> listarClientes = clienteRepository.findAll();
 		return listarClientes;
@@ -47,31 +47,29 @@ public class ClienteController {
 		}
 	}
 	
-	@PostMapping("/adicionar")
+	@PostMapping("/adiciona")
 	@ResponseStatus(code = HttpStatus.CREATED) //Resposta de 201 criado com sucesso - uma boa prática
 	public Cliente salvar(@Valid @RequestBody Cliente clienteAdd){
 		Cliente salvarCliente = cadastroClienteService.salvar(clienteAdd);
 		return salvarCliente;
 	}
-	@PutMapping("/{clienteid}")
-	// 'ResponseEntity' manipula resultado do protocolo http. Ele dar recursos para o método de resposta.
-	
-	public ResponseEntity<Cliente> editar(@Valid @PathVariable Long clienteid,
+	@PutMapping("id}")	
+	public ResponseEntity<Cliente> editar(@Valid @PathVariable Long id,
 										  @RequestBody Cliente clienteEditar){
-		if(!clienteRepository.existsById(clienteid)) {
+		if(!clienteRepository.existsById(id)) {
 			return ResponseEntity.notFound().build();
 		}
-		clienteEditar.setId(clienteid);
+		clienteEditar.setId(id);
 		clienteEditar = cadastroClienteService.salvar(clienteEditar);
 		return ResponseEntity.ok(clienteEditar);
 	}
-	@DeleteMapping("/{clienteid}")
-	public ResponseEntity<Cliente> remover(@PathVariable Long clienteid){
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Cliente> remover(@PathVariable Long id){
 		
-		if(!clienteRepository.existsById(clienteid)) {
+		if(!clienteRepository.existsById(id)) {
 			return ResponseEntity.notFound().build();
 		}else {
-			clienteRepository.deleteById(clienteid);
+			clienteRepository.deleteById(id);
 			return ResponseEntity.noContent().build();
 			}
 		

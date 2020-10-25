@@ -1,7 +1,9 @@
 package com.projetoapi.exceptionhandler;
-//@Jsoninclud - esta anotação faz a remoção dos campos null json no Postmam
 import java.time.LocalDateTime;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +11,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@JsonInclude(Include.NON_NULL) //@Jsoninclud - esta anotação faz a remoção dos campos null json no Postmam
 public class Problema {
 	
 	private Integer status;

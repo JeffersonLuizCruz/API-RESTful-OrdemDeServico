@@ -1,11 +1,11 @@
 package com.projetoapi.IRepository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import com.projetoapi.model.OrdemServico;
 
-@Service
+@Repository
 public interface IOrdemServicoRepository  extends JpaRepository<OrdemServico, Long>{
 
 }

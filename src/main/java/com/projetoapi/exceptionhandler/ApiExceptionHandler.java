@@ -21,13 +21,20 @@ import com.projetoapi.domain.exception.NegocioException;
 
 @RestControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
-	
+	/*
+	 * ResponseEntityExceptionHandler
+	 * Classe que trata exceções das saídas JSON
+	 * */
 	@Autowired
-	private MessageSource messageSource;
+	private MessageSource messageSource; 
+	//interface para personalizar mensagem no arquivo /src/main/resources/messages.properties
 	//private Object bindingResult;
 	
 	@ExceptionHandler(NegocioException.class)
 	public ResponseEntity<Object> handleNegocio(NegocioException ex, WebRequest request){
+		/*Caso uma determinada exceção for lançada caia neste método que tem tratamento
+		 *para ela. Neste caso a exceção é NegocioException
+		 * * */
 		var status = HttpStatus.BAD_REQUEST;
 
 		var problema = new Problema();
@@ -45,8 +52,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 			MethodArgumentNotValidException ex,
 			HttpHeaders headers,
 			HttpStatus status,
-			WebRequest request
-			) {
+			WebRequest request) {
 		
 		//original-ArrayList<Campo> campoList = new ArrayList<Campo>();
 		var campos = new ArrayList<Problema.Campo>();
