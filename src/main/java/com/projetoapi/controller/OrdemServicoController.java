@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -45,6 +46,12 @@ public class OrdemServicoController {
 	@GetMapping
 	public List<OrdemServicoDTO> listar(){
 		return toCollectionDTO(ordemServicoRepository.findAll());
+	}
+	
+	@PutMapping("/{ordemServicoId}/finalizacao")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT) //Foi sucesso mas não tem resposta no corpo
+	public void finalizacao(@PathVariable Long ordemSevicoId){
+	    gestaoOrdemServico.finalizar(ordemSevicoId);
 	}
 	
 	@GetMapping("/{id}")

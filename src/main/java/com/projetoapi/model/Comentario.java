@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -20,11 +21,27 @@ public class Comentario implements Serializable{
 	private Long id;
 	
 	@ManyToOne
+	@JoinColumn(name = "ordem_servico_id")
 	private OrdemServico ordemServico;
+	
 	private String descricao;
+	
 	private OffsetDateTime dataEnvio;
 	
 	
+	public Comentario() {
+		super();
+		
+	}
+	
+	public Comentario(Long id, OrdemServico ordemServico, String descricao, OffsetDateTime dataEnvio) {
+		super();
+		this.id = id;
+		this.ordemServico = ordemServico;
+		this.descricao = descricao;
+		this.dataEnvio = dataEnvio;
+	}
+
 	public Long getId() {
 		return id;
 	}

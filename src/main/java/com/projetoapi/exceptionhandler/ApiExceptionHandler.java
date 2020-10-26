@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.projetoapi.domain.exception.EntidadeNaoEncontradaException;
 import com.projetoapi.domain.exception.NegocioException;
 
 @RestControllerAdvice
@@ -29,6 +30,23 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 	private MessageSource messageSource; 
 	//interface para personalizar mensagem no arquivo /src/main/resources/messages.properties
 	//private Object bindingResult;
+	
+	
+	@ExceptionHandler(EntidadeNaoEncontradaException.class)
+	public ResponseEntity<Object> handleEntidadeNaoEncontrada(NegocioException ex, WebRequest request){
+		/*
+		 *
+		 * * */
+		var status = HttpStatus.NOT_FOUND;
+
+		var problema = new Problema();
+		problema.setStatus(status.value());
+		problema.setTitulo(ex.getMessage());
+		problema.setDataHora(OffsetDateTime.now());
+
+		return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
+		}
+	
 	
 	@ExceptionHandler(NegocioException.class)
 	public ResponseEntity<Object> handleNegocio(NegocioException ex, WebRequest request){

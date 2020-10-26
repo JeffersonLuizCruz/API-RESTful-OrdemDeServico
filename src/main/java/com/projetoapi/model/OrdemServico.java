@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.projetoapi.domain.exception.NegocioException;
+
 
 @Entity
 public class OrdemServico implements Serializable{
@@ -185,6 +187,16 @@ public class OrdemServico implements Serializable{
 		if (status != other.status)
 			return false;
 		return true;
+	}
+
+	public void finalizar() {
+		
+		if(!StatusOrdemServico.ABERTA.equals(getStatus())){
+			throw new NegocioException("Ordem de Serviço não pode ser finalizada");
+			}
+		setStatus(StatusOrdemServico.FINALIZADA);
+		setDataFinalizacao(OffsetDateTime.now());
+		
 	}
 	
 	
