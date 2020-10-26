@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,15 +14,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.Valid;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.groups.ConvertGroup;
-import javax.validation.groups.Default;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
-import com.projetoapi.domain.validationGroups.ValidationGroups;
 
 
 @Entity
@@ -33,11 +29,14 @@ public class OrdemServico implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Valid
-	@ConvertGroup(from = Default.class, to = ValidationGroups.class)
+	//@Valid
+	//@ConvertGroup(from = Default.class, to = ValidationGroups.class)
 	@NotNull
 	@ManyToOne
 	private Cliente cliente;
+	
+	@OneToMany(mappedBy = "ordemServico")
+	private List<Comentario> comentarios = new ArrayList<>();
 	
 	@NotBlank
 	private String descricao;
@@ -46,13 +45,13 @@ public class OrdemServico implements Serializable{
 	private BigDecimal preco;
 	
 	@Enumerated(EnumType.STRING) 
-	@JsonProperty(access = Access.READ_ONLY) // Torna o status inalterável para o cliente na hora de criar uma OS
+	//@JsonProperty(access = Access.READ_ONLY) // Torna o status inalterável para o cliente na hora de criar uma OS
 	private StatusOrdemServico status;
 	
-	@JsonProperty(access = Access.READ_ONLY) // Torna o dataAbertura inalterável para o cliente na hora de criar uma OS
+	//@JsonProperty(access = Access.READ_ONLY) // Torna o dataAbertura inalterável para o cliente na hora de criar uma OS
 	private OffsetDateTime dataAbertura;
 	
-	@JsonProperty(access = Access.READ_ONLY) // Torna o dataFinalizacao inalterável para o cliente na hora de criar uma OS
+	//@JsonProperty(access = Access.READ_ONLY) // Torna o dataFinalizacao inalterável para o cliente na hora de criar uma OS
 	private OffsetDateTime dataFinalizacao;
 	
 	public OrdemServico() {
@@ -85,6 +84,15 @@ public class OrdemServico implements Serializable{
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+	
+	
+	public List<Comentario> getComentarios() {
+		return comentarios;
+	}
+
+	public void setComentarios(List<Comentario> comentarios) {
+		this.comentarios = comentarios;
 	}
 
 	public String getDescricao() {

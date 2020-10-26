@@ -47,13 +47,13 @@ public class ClienteController {
 		}
 	}
 	
-	@PostMapping("/adiciona")
+	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED) //Resposta de 201 criado com sucesso - uma boa prática
 	public Cliente salvar(@Valid @RequestBody Cliente clienteAdd){
 		Cliente salvarCliente = cadastroClienteService.salvar(clienteAdd);
 		return salvarCliente;
 	}
-	@PutMapping("id}")	
+	@PutMapping("/{id}")	
 	public ResponseEntity<Cliente> editar(@Valid @PathVariable Long id,
 										  @RequestBody Cliente clienteEditar){
 		if(!clienteRepository.existsById(id)) {

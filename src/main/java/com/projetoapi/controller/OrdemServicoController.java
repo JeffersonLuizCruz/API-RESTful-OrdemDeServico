@@ -2,9 +2,11 @@ package com.projetoapi.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.projetoapi.IRepository.IOrdemServicoRepository;
 import com.projetoapi.domain.service.GestaoOrdemServicoService;
+import com.projetoapi.dto.OrdemServicoDTO;
 import com.projetoapi.model.OrdemServico;
 
 @RestController
@@ -30,26 +33,39 @@ public class OrdemServicoController {
 	@Autowired
 	private IOrdemServicoRepository ordemServicoRepository;
 	
+	@Autowired
+	private ModelMapper modelMapper;
 
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public OrdemServico criar(@Valid @RequestBody OrdemServico ordemServico){
-	return gestaoOrdemServico.criar(ordemServico);
+	public OrdemServicoDTO criar(@Valid @RequestBody OrdemServico ordemServico){
+	return toDTO(gestaoOrdemServico.criar(ordemServico));
 	}
 	
 	@GetMapping
-	public List<OrdemServico> listar(){
-		return ordemServicoRepository.findAll();
+	public List<OrdemServicoDTO> listar(){
+		return toCollectionDTO(ordemServicoRepository.findAll());
 	}
 	
-	@GetMapping("/{ordemServicoId}")
-	public ResponseEntity<OrdemServico> buscar(@PathVariable Long ordemServicoId){
-		Optional<OrdemServico> ordemServico = ordemServicoRepository.findById(ordemServicoId);
+	@GetMapping("/{id}")
+	public ResponseEntity<OrdemServicoDTO> buscar(@PathVariable Long id){
+		Optional<OrdemServico> ordemServico = ordemServicoRepository.findById(id);
 		
 		if(ordemServico.isPresent()){
-			return ResponseEntity.ok(ordemServico.get());
+			OrdemServicoDTO modelDTO = toDTO(ordemServico.get());
+			return ResponseEntity.ok(modelDTO);
 			}
 		return ResponseEntity.notFound().build();
 		}
+	
+	private OrdemServicoDTO toDTO(OrdemServico ordemServico) {
+		return modelMapper.map(ordemServico, OrdemServicoDTO.class);
+	}
+	private List<OrdemServicoDTO> toCollectionDTO(List<OrdemServico> ordensServicos){
+		return ordensServicos.stream()
+				.map(ordemServico -> toDTO(ordemServico))
+				.collect(Collectors.toList());
+		
+	}
 
 }
