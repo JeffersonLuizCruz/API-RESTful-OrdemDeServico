@@ -36,9 +36,9 @@ public class ComentarioController {
 
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public Comentario adicionar(@PathVariable @Valid @RequestBody Long id, Comentario comentario) {
-		Comentario saveComentario = gestaoOrdemService.adicionarComentario(id, comentario.getDescricao());
-		return comentarioRepository.save(saveComentario);
+	public Comentario adicionar(@PathVariable @Valid @RequestBody Comentario id, String descricao) {
+		Comentario result = gestaoOrdemService.adicionarComentario(id, descricao);
+		return comentarioRepository.save(result);
 	}
 	
 	@GetMapping

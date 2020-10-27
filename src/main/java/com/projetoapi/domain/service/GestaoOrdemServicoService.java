@@ -46,8 +46,9 @@ public class GestaoOrdemServicoService {
 	    ordemServicoRepository.save(ordemServico);
 	}
 	
-	public Comentario adicionarComentario(Long ordemServicoId, String descricao) {
-		OrdemServico ordemServico = buscar(ordemServicoId);
+	public Comentario adicionarComentario(Comentario id, String descricao) {
+		OrdemServico ordemServico = ordemServicoRepository.findById(id.getOrdemServico().getId())
+				.orElseThrow(() -> new EntidadeNaoEncontradaException("Ordem de Serviço não encontrada"));
 		
 		Comentario comentario = new Comentario();
 		

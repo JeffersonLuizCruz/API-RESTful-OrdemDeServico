@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.projetoapi.IRepository.IClienteRepository;
 import com.projetoapi.domain.service.CadastroClienteService;
+import com.projetoapi.dto.response.ClienteResponseDTO;
 import com.projetoapi.model.Cliente;
 
 @RestController
@@ -37,11 +38,12 @@ public class ClienteController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Cliente> buscar(@PathVariable Long id){
+	public ResponseEntity<Object> buscar(@PathVariable Long id){
 		Optional<Cliente> buscarCliente = clienteRepository.findById(id);
 		
 		if(buscarCliente.isPresent()) {
-			return ResponseEntity.ok(buscarCliente.get());
+			return new ResponseEntity<>(new ClienteResponseDTO(buscarCliente.get()), HttpStatus.OK);
+			//return ResponseEntity.ok(buscarCliente.get());
 		}else {
 			return ResponseEntity.notFound().build();
 		}
