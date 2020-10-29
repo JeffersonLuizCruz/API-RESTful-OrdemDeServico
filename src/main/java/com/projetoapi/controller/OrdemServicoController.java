@@ -48,10 +48,10 @@ public class OrdemServicoController {
 		return toCollectionDTO(ordemServicoRepository.findAll());
 	}
 	
-	@PutMapping("/{ordemServicoId}/finalizacao")
+	@PutMapping("/{ordemServicoId}/finalizada")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT) //Foi sucesso mas não tem resposta no corpo
-	public void finalizacao(@PathVariable Long ordemSevicoId){
-	    gestaoOrdemServico.finalizar(ordemSevicoId);
+	public void finalizacao(@PathVariable Long ordemServicoId){
+	    gestaoOrdemServico.finalizar(ordemServicoId);
 	}
 	
 	@GetMapping("/{id}")

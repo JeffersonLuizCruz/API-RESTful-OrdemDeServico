@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,8 @@ import com.projetoapi.IRepository.ComentarioRepository;
 import com.projetoapi.IRepository.IOrdemServicoRepository;
 import com.projetoapi.domain.exception.EntidadeNaoEncontradaException;
 import com.projetoapi.domain.service.GestaoOrdemServicoService;
+import com.projetoapi.dto.request.ComentarioInput;
+import com.projetoapi.dto.response.ComentarioModel;
 import com.projetoapi.model.Comentario;
 import com.projetoapi.model.OrdemServico;
 
@@ -33,12 +36,17 @@ public class ComentarioController {
 	
 	@Autowired
 	IOrdemServicoRepository ordemServicoRepository;
-
+	
+	@Autowired
+	private ModelMapper modelMapper;
+	
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public Comentario adicionar(@PathVariable @Valid @RequestBody Comentario id, String descricao) {
-		Comentario result = gestaoOrdemService.adicionarComentario(id, descricao);
-		return comentarioRepository.save(result);
+	public ComentarioModel adicionar(@PathVariable Long id,
+			@Valid @RequestBody ComentarioInput comentarioInput) {
+		Comentario comentario = gestaoOrdemService.adicionarComentario(id, comentarioInput.getDescricao());
+		
+		return toDTO(comentario);
 	}
 	
 	@GetMapping
@@ -48,5 +56,9 @@ public class ComentarioController {
 		
 		return ordemServico.getComentarios();
 	}
-
+	
+	private ComentarioModel toDTO(Comentario comentario) {
+		return modelMapper.map(comentario, ComentarioModel.class);
+	}
+	
 }

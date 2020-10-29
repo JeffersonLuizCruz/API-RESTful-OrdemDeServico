@@ -17,11 +17,11 @@ import lombok.Setter;
 @Setter
 public class ComentarioRequestDTO {
 	
-	private String descricao;
+	private String descricaoTecnica;
 	
 	public Comentario build() {
 		Comentario comentario = new Comentario()
-				.setDescricao(this.descricao);
+				.setDescricaoTecnica(this.descricaoTecnica);
 		return comentario;
 	}
 

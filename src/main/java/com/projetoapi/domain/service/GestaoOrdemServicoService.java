@@ -39,24 +39,24 @@ public class GestaoOrdemServicoService {
 		return ordemServicoRepository.save(ordemServico);
 	}
 	
-	public void finalizar(Long ordemServicoId){
-	    OrdemServico ordemServico = buscar(ordemServicoId);
-	    
-	    ordemServico.finalizar();
-	    ordemServicoRepository.save(ordemServico);
-	}
-	
-	public Comentario adicionarComentario(Comentario id, String descricao) {
-		OrdemServico ordemServico = ordemServicoRepository.findById(id.getOrdemServico().getId())
+	public Comentario adicionarComentario(Long id, String descricao) {
+		OrdemServico ordemServico = ordemServicoRepository.findById(id)
 				.orElseThrow(() -> new EntidadeNaoEncontradaException("Ordem de Serviço não encontrada"));
 		
 		Comentario comentario = new Comentario();
 		
 		comentario.setDataEnvio(OffsetDateTime.now());
-		comentario.setDescricao(descricao);
+		comentario.setDescricaoTecnica(descricao);
 		comentario.setOrdemServico(ordemServico);
 		
 		return comentarioRepository.save(comentario);
+	}
+	
+	public void finalizar(Long ordemServicoId){
+	    OrdemServico ordemServico = buscar(ordemServicoId);
+	    
+	    ordemServico.finalizar();
+	    ordemServicoRepository.save(ordemServico);
 	}
 	
 	private OrdemServico buscar(Long ordemServicoId){

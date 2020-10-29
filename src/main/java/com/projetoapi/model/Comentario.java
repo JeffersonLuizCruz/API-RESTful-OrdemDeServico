@@ -34,7 +34,7 @@ public class Comentario implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String descricao;
+	private String descricaoTecnica;
 	private OffsetDateTime dataEnvio;
 	
 	@ManyToOne

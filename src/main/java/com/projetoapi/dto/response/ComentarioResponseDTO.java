@@ -24,7 +24,7 @@ public class ComentarioResponseDTO {
 	public ComentarioResponseDTO(Comentario comentario) {
 		
 		this.id = comentario.getId();
-		this.descricao = comentario.getDescricao();
+		this.descricao = comentario.getDescricaoTecnica();
 		this.dataEnvio = comentario.getDataEnvio();
 	}
 

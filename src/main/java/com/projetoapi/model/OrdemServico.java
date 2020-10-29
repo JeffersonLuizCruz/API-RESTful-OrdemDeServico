@@ -69,16 +69,33 @@ public class OrdemServico implements Serializable{
 	//@JsonProperty(access = Access.READ_ONLY) // Torna o dataFinalizacao inalterável para o cliente na hora de criar uma OS
 	private OffsetDateTime dataFinalizacao;
 	
-
+	
+	public boolean podeSerFinalizada() {
+		return StatusOrdemServico.ABERTA.equals(getStatus());
+	}
+	
+	public boolean naoPodeSerFinalizada() {
+		return !podeSerFinalizada();
+	}
+	
 	public void finalizar() {
-		
-		if(!StatusOrdemServico.ABERTA.equals(getStatus())){
+		if(naoPodeSerFinalizada()) {
 			throw new NegocioException("Ordem de Serviço não pode ser finalizada");
-			}
+		}
 		setStatus(StatusOrdemServico.FINALIZADA);
 		setDataFinalizacao(OffsetDateTime.now());
-		
 	}
+	
+
+//	public void finalizar() {
+//		
+//		if(!StatusOrdemServico.ABERTA.equals(getStatus())){
+//			throw new NegocioException("Ordem de Serviço não pode ser finalizada");
+//			}
+//		setStatus(StatusOrdemServico.FINALIZADA);
+//		setDataFinalizacao(OffsetDateTime.now());
+//		
+//	}
 	
 	
 	
