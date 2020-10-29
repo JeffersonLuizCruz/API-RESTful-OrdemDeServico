@@ -37,14 +37,58 @@ Esta aplicação usa o conceito de boas práticas de criação de API REST. Esta
 ## Rota[GET] - Listar todos clientes
 - [GET] _localhost:8080/clientes
 
+### Resposta:
+´´´
+    {
+        "id": 1,
+        "nome": "João",
+        "email": "joao@gmail.com",
+        "telefone": "34 7394-4499"
+    }
+    ...
+´´´
+
 ## Rota[GET] - Listar cliente por id
 - [GET] _localhost:8080/clientes/{id}
+
+### Resposta:
+´´´
+    {
+        "id": 1,
+        "nome": "João",
+        "email": "joao@gmail.com",
+        "telefone": "34 7394-4499"
+    }
+´´´
 
 ## Rota[GET] - Listar ordem de serviço por id
 - [GET] _localhost:8080/ordens-servico/{id}
 
+### Resposta:
+´´´
+{
+    "descricao": "Reparo de noteboot dell. Cliente diz que não liga",
+    "preco": 300.50,
+    "status": "FINALIZADA",
+    "dataAbertura": "2020-10-27T00:03:00.517491-03:00",
+    "dataFinalizacao": "2020-10-27T02:28:02.898187-03:00"
+}
+´´´
+
 ## Rota[GET] - Listar todas ordem de serviço
 - [GET] _localhost:8080/ordens-servico/
+
+### Resposta:
+´´´
+{
+    "descricao": "Reparo de noteboot dell. Cliente diz que não liga",
+    "preco": 300.50,
+    "status": "FINALIZADA",
+    "dataAbertura": "2020-10-27T00:03:00.517491-03:00",
+    "dataFinalizacao": "2020-10-27T02:28:02.898187-03:00"
+}
+...
+´´´
 
 
 ## Requisitos:
