@@ -1,6 +1,6 @@
 # Boas práticas de RESTful
 
-Esta aplicação usa o conceito de boas práticas de criação de API Rest. Esta é uma aplicação de 'Chamado de Serviço'. A função da aplicação é criar chamado de serviço, finalizar os chamaos, cancelar chamados, e listar os chamados abertos.
+Esta aplicação usa o conceito de boas práticas de criação de API REST. Esta é uma aplicação de 'Chamado de Serviço'. A função da aplicação é criar chamado de serviço, finalizar os chamaos, cancelar chamados, e listar os chamados abertos.
 
 ## Rota[POST]
 - [POST] _localhost:8080/ordens-servico
