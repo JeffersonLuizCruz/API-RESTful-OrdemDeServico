@@ -25,7 +25,7 @@ Esta aplicação usa o conceito de boas práticas de criação de API REST. Esta
     "descricao": "Placa não foi reparada"
 }
 ```
-#### Rota [PUT] - Alterar o status da ordem de servico para cancelado
+#### Rota [PUT] - Alterar o status da ordem de servico para finalizada
 - [PUT] _localhost:8080/ordens-servico/{id}/finalizada
 
 #### Body:
