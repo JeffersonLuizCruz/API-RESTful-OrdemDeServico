@@ -1,6 +1,12 @@
-# Boas práticas de RESTful
+# Projeto de Ordem de Serviço
 
 Esta aplicação usa o conceito de boas práticas de criação de API REST. Esta é uma aplicação de 'Chamado de Serviço'. A função da aplicação é criar chamado de serviço, finalizar os chamaos, cancelar chamados, e listar os chamados abertos.
+
+## Requisitos:
+- [x] Java 11<br>
+- [x] Spring Boot 2.3.4
+- [x] Spring JPA
+- [x] Exception personalizado
 
 ### Rota[POST]
 - [POST] _localhost:8080/ordens-servico
@@ -87,10 +93,3 @@ Esta aplicação usa o conceito de boas práticas de criação de API REST. Esta
     "dataFinalizacao": "2020-10-27T02:28:02.898187-03:00"
 }
 ```
-
-
-## Requisitos:
-- [x] Java 11<br>
-- [x] DTO<br>
-- [x] Java Swagger2 Swagger-ui<br>
-- [x] Exception personalizada
